@@ -1,0 +1,50 @@
+import {
+  TripSchedule,
+  TripScheduleWithMembers,
+} from '../../domain/entities/tripSchedule';
+import { CreateTripDto } from '../dtos/trip/createTripDto';
+import { TripScheduleResponseDto } from '../dtos/trip/tripScheduleResponseDto';
+
+export class TripScheduleConverter {
+  static fromCreateTripDto(
+    source: CreateTripDto,
+  ): Omit<TripScheduleWithMembers, 'id'> {
+    return {
+      name: source.title,
+      destination: source.destination,
+      destination_type: source.destinationType,
+      start_date: new Date(source.startDate),
+      end_date: new Date(source.endDate),
+      members: source.members,
+      created_by: source.createdBy,
+    };
+  }
+
+  static toResDto(
+    tripSchedule: TripSchedule & { members: string[] },
+  ): TripScheduleResponseDto {
+    return {
+      id: tripSchedule.id,
+      title: tripSchedule.name, // `name`-> `title`
+      destination: tripSchedule.destination,
+      destinationType: tripSchedule.destination_type,
+      startDate: tripSchedule.start_date.toISOString(), // Date -> ISO string
+      endDate: tripSchedule.end_date.toISOString(),
+      members: tripSchedule.members,
+      createdBy: tripSchedule.created_by,
+    };
+  }
+
+  static fromUpdateTripDto(
+    source: any,
+  ): Omit<TripSchedule, 'id' | 'created_by'> & { members: string[] } {
+    return {
+      name: source.title, // title을 name으로 매핑
+      destination: source.destination,
+      destination_type: source.destinationType,
+      start_date: new Date(source.startDate), // Date 객체로 변환
+      end_date: new Date(source.endDate),
+      members: source.members,
+    };
+  }
+}

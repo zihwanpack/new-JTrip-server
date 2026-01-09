@@ -1,0 +1,1530 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"UserResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"email": {
+						"type": "string"
+					},
+					"nickname": {
+						"type": "string"
+					},
+					"provider": {
+						"type": "string"
+					},
+					"profileImage": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"email",
+					"provider"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_UserResponse_": {
+				"description": "통일된 API 응답 형식",
+				"properties": {
+					"isSuccess": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"result": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/UserResponse"
+							}
+						],
+						"nullable": true
+					}
+				},
+				"required": [
+					"isSuccess",
+					"code",
+					"message",
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_UserResponse-Array_": {
+				"description": "통일된 API 응답 형식",
+				"properties": {
+					"isSuccess": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"result": {
+						"items": {
+							"$ref": "#/components/schemas/UserResponse"
+						},
+						"type": "array",
+						"nullable": true
+					}
+				},
+				"required": [
+					"isSuccess",
+					"code",
+					"message",
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse____": {
+				"description": "통일된 API 응답 형식",
+				"properties": {
+					"isSuccess": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"result": {
+						"properties": {},
+						"type": "object",
+						"nullable": true
+					}
+				},
+				"required": [
+					"isSuccess",
+					"code",
+					"message",
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TripScheduleResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"title": {
+						"type": "string"
+					},
+					"destination": {
+						"type": "string"
+					},
+					"destinationType": {
+						"type": "string"
+					},
+					"startDate": {
+						"type": "string"
+					},
+					"endDate": {
+						"type": "string"
+					},
+					"createdBy": {
+						"type": "string"
+					},
+					"members": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"destination",
+					"destinationType",
+					"startDate",
+					"endDate",
+					"createdBy",
+					"members"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_TripScheduleResponse_": {
+				"description": "통일된 API 응답 형식",
+				"properties": {
+					"isSuccess": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"result": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/TripScheduleResponse"
+							}
+						],
+						"nullable": true
+					}
+				},
+				"required": [
+					"isSuccess",
+					"code",
+					"message",
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateTripRequest": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"destination": {
+						"type": "string"
+					},
+					"destinationType": {
+						"type": "string"
+					},
+					"startDate": {
+						"type": "string"
+					},
+					"endDate": {
+						"type": "string"
+					},
+					"members": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"createdBy": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"title",
+					"destination",
+					"destinationType",
+					"startDate",
+					"endDate",
+					"members",
+					"createdBy"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_TripScheduleResponse-Array_": {
+				"description": "통일된 API 응답 형식",
+				"properties": {
+					"isSuccess": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"result": {
+						"items": {
+							"$ref": "#/components/schemas/TripScheduleResponse"
+						},
+						"type": "array",
+						"nullable": true
+					}
+				},
+				"required": [
+					"isSuccess",
+					"code",
+					"message",
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CursorPaginationMeta": {
+				"description": "커서 기반 페이지네이션 메타데이터",
+				"properties": {
+					"hasNext": {
+						"type": "boolean"
+					},
+					"nextCursor": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"limit": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"hasNext",
+					"nextCursor",
+					"limit"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CursorPaginatedResponse_TripScheduleResponse_": {
+				"description": "커서 기반 페이지네이션 응답",
+				"properties": {
+					"items": {
+						"items": {
+							"$ref": "#/components/schemas/TripScheduleResponse"
+						},
+						"type": "array"
+					},
+					"pagination": {
+						"$ref": "#/components/schemas/CursorPaginationMeta"
+					}
+				},
+				"required": [
+					"items",
+					"pagination"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_CursorPaginatedResponse_TripScheduleResponse__": {
+				"description": "통일된 API 응답 형식",
+				"properties": {
+					"isSuccess": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"result": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/CursorPaginatedResponse_TripScheduleResponse_"
+							}
+						],
+						"nullable": true
+					}
+				},
+				"required": [
+					"isSuccess",
+					"code",
+					"message",
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_TripScheduleResponse-or-null_": {
+				"description": "통일된 API 응답 형식",
+				"properties": {
+					"isSuccess": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"result": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/TripScheduleResponse"
+							}
+						],
+						"nullable": true
+					}
+				},
+				"required": [
+					"isSuccess",
+					"code",
+					"message",
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse__message-string__": {
+				"description": "통일된 API 응답 형식",
+				"properties": {
+					"isSuccess": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"result": {
+						"properties": {
+							"message": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"message"
+						],
+						"type": "object",
+						"nullable": true
+					}
+				},
+				"required": [
+					"isSuccess",
+					"code",
+					"message",
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateTripRequest": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"destination": {
+						"type": "string"
+					},
+					"destinationType": {
+						"type": "string"
+					},
+					"startDate": {
+						"type": "string"
+					},
+					"endDate": {
+						"type": "string"
+					},
+					"members": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"createdBy": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"title",
+					"destination",
+					"destinationType",
+					"startDate",
+					"endDate",
+					"members",
+					"createdBy"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Cost": {
+				"properties": {
+					"category": {
+						"type": "string"
+					},
+					"value": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"category",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TripEventResponse": {
+				"properties": {
+					"tripId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventName": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"startDate": {
+						"type": "string"
+					},
+					"endDate": {
+						"type": "string"
+					},
+					"cost": {
+						"items": {
+							"$ref": "#/components/schemas/Cost"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"tripId",
+					"eventId",
+					"eventName",
+					"location",
+					"startDate",
+					"endDate",
+					"cost"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_TripEventResponse_": {
+				"description": "통일된 API 응답 형식",
+				"properties": {
+					"isSuccess": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"result": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/TripEventResponse"
+							}
+						],
+						"nullable": true
+					}
+				},
+				"required": [
+					"isSuccess",
+					"code",
+					"message",
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateTripEventRequest": {
+				"properties": {
+					"tripId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventName": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"startDate": {
+						"type": "string"
+					},
+					"endDate": {
+						"type": "string"
+					},
+					"cost": {
+						"items": {
+							"$ref": "#/components/schemas/Cost"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"tripId",
+					"eventName",
+					"location",
+					"startDate",
+					"endDate",
+					"cost"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TripEventRequest": {
+				"properties": {
+					"tripId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventId": {
+						"type": "number",
+						"format": "double"
+					},
+					"eventName": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"startDate": {
+						"type": "string"
+					},
+					"endDate": {
+						"type": "string"
+					},
+					"cost": {
+						"items": {
+							"$ref": "#/components/schemas/Cost"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"tripId",
+					"eventName",
+					"location",
+					"startDate",
+					"endDate",
+					"cost"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_TripEventResponse-Array_": {
+				"description": "통일된 API 응답 형식",
+				"properties": {
+					"isSuccess": {
+						"type": "boolean"
+					},
+					"code": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"result": {
+						"items": {
+							"$ref": "#/components/schemas/TripEventResponse"
+						},
+						"type": "array",
+						"nullable": true
+					}
+				},
+				"required": [
+					"isSuccess",
+					"code",
+					"message",
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"jwt": {
+				"type": "apiKey",
+				"name": "access_token",
+				"in": "cookie"
+			}
+		}
+	},
+	"info": {
+		"title": "server",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/users/{id}": {
+			"get": {
+				"operationId": "GetUserById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_UserResponse_"
+								}
+							}
+						}
+					}
+				},
+				"description": "ID로 유저 조회",
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse____"
+								}
+							}
+						}
+					}
+				},
+				"description": "유저 삭제",
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/users/email/{email}": {
+			"get": {
+				"operationId": "FindUserByEmail",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_UserResponse_"
+								}
+							}
+						}
+					}
+				},
+				"description": "이메일로 유저 조회",
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "email",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/users/emails": {
+			"post": {
+				"operationId": "FindUsersByEmails",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_UserResponse-Array_"
+								}
+							}
+						}
+					}
+				},
+				"description": "이메일 배열로 유저 정보 조회",
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"emails": {
+										"items": {
+											"type": "string"
+										},
+										"type": "array"
+									}
+								},
+								"required": [
+									"emails"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/search": {
+			"get": {
+				"operationId": "GetUserSearch",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_UserResponse-Array_"
+								}
+							}
+						}
+					}
+				},
+				"description": "이메일로 유저 검색",
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "query",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/users/logout": {
+			"post": {
+				"operationId": "Logout",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse____"
+								}
+							}
+						}
+					}
+				},
+				"description": "로그아웃",
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/trips": {
+			"post": {
+				"operationId": "CreateTrip",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_TripScheduleResponse_"
+								}
+							}
+						}
+					}
+				},
+				"description": "여행 일정 생성",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTripRequest"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteTrips",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse____"
+								}
+							}
+						}
+					}
+				},
+				"description": "여러 여행 일정 삭제",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"ids": {
+										"items": {
+											"type": "number",
+											"format": "double"
+										},
+										"type": "array"
+									}
+								},
+								"required": [
+									"ids"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/trips/user/{userId}": {
+			"get": {
+				"operationId": "GetTripsByUserId",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_TripScheduleResponse-Array_"
+								}
+							}
+						}
+					}
+				},
+				"description": "유저가 속한 여행 일정 목록 조회",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/trips/user/{userId}/past": {
+			"get": {
+				"operationId": "GetPastTripsByUserId",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_TripScheduleResponse-Array_"
+								}
+							}
+						}
+					}
+				},
+				"description": "지나간 여행 일정 목록 조회",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/trips/user/{userId}/past/cursor": {
+			"get": {
+				"operationId": "GetPastTripsByUserIdWithCursor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_CursorPaginatedResponse_TripScheduleResponse__"
+								}
+							}
+						}
+					}
+				},
+				"description": "지나간 여행 일정 목록 조회 (커서 기반 무한 스크롤)",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "cursor",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 10,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/trips/user/{userId}/current": {
+			"get": {
+				"operationId": "GetCurrentTripsByUserId",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_TripScheduleResponse-or-null_"
+								}
+							}
+						}
+					}
+				},
+				"description": "진행중인 여행 일정 조회 (단일 객체)",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/trips/user/{userId}/upcoming": {
+			"get": {
+				"operationId": "GetUpcomingTripsByUserId",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_TripScheduleResponse-Array_"
+								}
+							}
+						}
+					}
+				},
+				"description": "다가올 여행 일정 목록 조회",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/trips/user/{userId}/upcoming/cursor": {
+			"get": {
+				"operationId": "GetUpcomingTripsByUserIdWithCursor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_CursorPaginatedResponse_TripScheduleResponse__"
+								}
+							}
+						}
+					}
+				},
+				"description": "다가올 여행 일정 목록 조회 (커서 기반 무한 스크롤)",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "cursor",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"default": 10,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/trips/{tripId}": {
+			"get": {
+				"operationId": "GetTripById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_TripScheduleResponse_"
+								}
+							}
+						}
+					}
+				},
+				"description": "단일 여행 데이터 조회",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "tripId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"patch": {
+				"operationId": "UpdateTripSchedule",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse__message-string__"
+								}
+							}
+						}
+					}
+				},
+				"description": "여행 일정 업데이트",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "tripId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateTripRequest"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteTrip",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse____"
+								}
+							}
+						}
+					}
+				},
+				"description": "여행 일정 삭제",
+				"tags": [
+					"TripSchedule"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "tripId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/event": {
+			"post": {
+				"operationId": "CreateTripEvent",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_TripEventResponse_"
+								}
+							}
+						}
+					}
+				},
+				"description": "이벤트 생성",
+				"tags": [
+					"TripEvent"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTripEventRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/event/{event_id}": {
+			"patch": {
+				"operationId": "UpdateTripEvent",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_TripEventResponse_"
+								}
+							}
+						}
+					}
+				},
+				"description": "이벤트 업데이트",
+				"tags": [
+					"TripEvent"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "event_id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TripEventRequest"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetTripEventById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_TripEventResponse_"
+								}
+							}
+						}
+					}
+				},
+				"description": "event_id로 event 단일 조회",
+				"tags": [
+					"TripEvent"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "event_id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteTripEventById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse____"
+								}
+							}
+						}
+					}
+				},
+				"description": "event_id로 event 단일 삭제",
+				"tags": [
+					"TripEvent"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "event_id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/event/all/{trip_id}": {
+			"get": {
+				"operationId": "GetTripEventsByTripId",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_TripEventResponse-Array_"
+								}
+							}
+						}
+					}
+				},
+				"description": "trip_id로 event 모두 조회",
+				"tags": [
+					"TripEvent"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "trip_id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
