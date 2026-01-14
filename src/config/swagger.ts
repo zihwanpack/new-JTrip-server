@@ -4,8 +4,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export const setupSwagger = (app: Express) => {
-  const swaggerFilePath = path.join(__dirname, '../swagger/swagger.json');
-  const swaggerDocument = JSON.parse(fs.readFileSync(swaggerFilePath, 'utf-8'));
+  const swaggerSpecPath = path.join(__dirname, '../swagger/swagger.json');
+  const swaggerDocument = JSON.parse(fs.readFileSync(swaggerSpecPath, 'utf-8'));
+
+  console.log('Swagger Path Check:', swaggerSpecPath);
 
   const swaggerOptions = {
     customCss: '.swagger-ui .topbar { display: none }',

@@ -1,4 +1,4 @@
-import prisma from '../../../prisma/client'; // 싱글톤 패턴 적용
+import prisma from '../../prisma/client';
 
 import { TripScheduleRepository } from '../../domain/repositories/tripScheduleRepository';
 import {

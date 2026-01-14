@@ -1,4 +1,4 @@
-import prisma from '../../../prisma/client';
+import prisma from '../../prisma/client';
 import {
   TripEvent as PrismaTripEvent,
   Cost as PrismaCost,

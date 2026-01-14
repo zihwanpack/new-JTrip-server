@@ -1,0 +1,13 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: jtrip-api
+    container_name: jtrip-api
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env.production
+    restart: always

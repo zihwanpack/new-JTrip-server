@@ -1,4 +1,4 @@
-import prisma from '../../../prisma/client';
+import prisma from '../../prisma/client';
 import { User as PrismaUser } from '@prisma/client';
 
 import { User } from '../../domain/models/user';
