@@ -46,13 +46,13 @@ googleRouter.get(
       // 토큰을 쿠키로 저장
       res.cookie('access_token', accessToken, {
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: 'none',
         secure: true,
         maxAge: 1000 * 60 * 5, // 15분
       });
       res.cookie('refresh_token', refreshToken, {
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: 'none',
         secure: true,
         maxAge: 1000 * 60 * 60 * 24 * 30, // 30일
       });
