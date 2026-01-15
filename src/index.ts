@@ -45,7 +45,7 @@ app.use(cookieParser());
 initPassport();
 app.use(passport.initialize());
 
-// Swagger UI 설정
+// Swagger UI 설
 setupSwagger(app);
 
 app.use('/', rootRouter);
