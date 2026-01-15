@@ -28,6 +28,7 @@ app.use(
       const allowedOrigins = [
         'http://localhost:5173',
         'https://new-j-trip-eu08v40rs-zihwanpacks-projects.vercel.app',
+        'https://new-j-trip.vercel.app',
       ];
       if (!origin || allowedOrigins.includes(origin)) {
         // 동적으로 출처 확인.
