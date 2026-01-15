@@ -1,0 +1,34 @@
+name: Deploy to Oracle Cloud (Docker)
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH to OCI and deploy with Docker
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.OCI_HOST }}
+          username: ${{ secrets.OCI_USER }}
+          key: ${{ secrets.OCI_SSH_KEY }}
+          port: 22
+          script: |
+            set -e
+
+            echo "📁 Move to app directory"
+            cd ${{ secrets.OCI_APP_PATH }}
+
+            echo "📦 Pull latest code"
+            git fetch --all
+            git reset --hard origin/main
+
+            echo "🐳 Docker compose build & up"
+            docker compose pull
+            docker compose up -d --build
+
+            echo "🧹 Remove unused images"
+            docker image prune -f
