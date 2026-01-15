@@ -1,0 +1,18 @@
+name: Keep Alive Supabase
+
+on:
+  schedule:
+    # 매일 한국 시간 오전 9시 (UTC 0시)에 실행
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 수동 실행 버튼 추가
+
+jobs:
+  wake_up:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wake up Supabase
+        run: |
+          # Supabase REST API를 깨우는 명령어
+          curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/TripSchedule?select=*&limit=1" \
+          -H "apikey: ${{ secrets.SUPABASE_KEY }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY }}"
