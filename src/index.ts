@@ -11,6 +11,7 @@ import { di } from './di';
 import { setupSwagger } from './config/swagger';
 
 const app = express();
+app.set('trust proxy', 1);
 
 di(app);
 
@@ -24,7 +25,10 @@ console.log('DATABASE_URL:', process.env.DATABASE_URL);
 app.use(
   cors({
     origin: (origin, callback) => {
-      const allowedOrigins = ['http://localhost:5173', 'https://jtrip.store'];
+      const allowedOrigins = [
+        'http://localhost:5173',
+        'https://new-j-trip-eu08v40rs-zihwanpacks-projects.vercel.app',
+      ];
       if (!origin || allowedOrigins.includes(origin)) {
         // 동적으로 출처 확인.
         callback(null, true);
@@ -49,6 +53,14 @@ app.use(passport.initialize());
 setupSwagger(app);
 
 app.use('/', rootRouter);
+
+app.get('/test', (req, res) => {
+  res.json({
+    protocol: req.protocol,
+    secure: req.secure,
+    forwardedProto: req.headers['x-forwarded-proto'],
+  });
+});
 
 app.listen(app.get('port'), async () => {
   console.log(`Redirect URL Base: ${redirectUrlBase}`);
