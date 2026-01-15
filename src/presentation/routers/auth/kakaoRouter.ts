@@ -40,15 +40,15 @@ kakaoRouter.get(
       const refreshToken = generateRefreshToken(jwtPayload);
 
       res.cookie('access_token', accessToken, {
-        httpOnly: false,
+        httpOnly: true,
         sameSite: 'lax',
-        secure: false,
+        secure: true,
         maxAge: 1000 * 60 * 5,
       });
       res.cookie('refresh_token', refreshToken, {
         httpOnly: true,
         sameSite: 'lax',
-        secure: false,
+        secure: true,
         maxAge: 1000 * 60 * 60 * 24 * 30,
       });
 

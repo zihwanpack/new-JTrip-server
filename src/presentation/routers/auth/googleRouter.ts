@@ -45,15 +45,15 @@ googleRouter.get(
 
       // 토큰을 쿠키로 저장
       res.cookie('access_token', accessToken, {
-        httpOnly: false, // 프론트에서 읽을 수 있도록
+        httpOnly: true,
         sameSite: 'lax',
-        secure: false,
+        secure: true,
         maxAge: 1000 * 60 * 5, // 15분
       });
       res.cookie('refresh_token', refreshToken, {
         httpOnly: true,
         sameSite: 'lax',
-        secure: false,
+        secure: true,
         maxAge: 1000 * 60 * 60 * 24 * 30, // 30일
       });
 

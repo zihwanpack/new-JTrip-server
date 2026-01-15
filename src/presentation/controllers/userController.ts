@@ -383,14 +383,14 @@ export const getUserSearchHandler = async (req: Request, res: Response) => {
 
 export const logout = (_req: Request, res: Response) => {
   res.clearCookie('access_token', {
-    httpOnly: false,
+    httpOnly: true,
     sameSite: 'lax',
-    secure: false,
+    secure: true,
   });
   res.clearCookie('refresh_token', {
     httpOnly: true,
     sameSite: 'lax',
-    secure: false,
+    secure: true,
   });
 
   res.status(204).end();

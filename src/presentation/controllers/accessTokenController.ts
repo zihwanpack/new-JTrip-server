@@ -21,7 +21,7 @@ export const issueAccessToken: RequestHandler = async (req, res) => {
       res.clearCookie('refresh_token', {
         httpOnly: true,
         sameSite: 'lax',
-        secure: false,
+        secure: true,
       });
       sendError(res, 401, 'Invalid or expired refresh token');
       return;
@@ -38,15 +38,15 @@ export const issueAccessToken: RequestHandler = async (req, res) => {
 
     // 4. 쿠키 갱신
     res.cookie('access_token', newAccessToken, {
-      httpOnly: false,
+      httpOnly: true,
       sameSite: 'lax',
-      secure: false,
+      secure: true,
       maxAge: 1000 * 60 * 5,
     });
     res.cookie('refresh_token', newRefreshToken, {
       httpOnly: true,
       sameSite: 'lax',
-      secure: false,
+      secure: true,
       maxAge: 1000 * 60 * 60 * 24 * 30,
     });
 
