@@ -5,6 +5,10 @@ import {
   generateRefreshToken,
 } from '../../utils/jwt';
 import { sendSuccess, sendError } from '../../utils/responseHelper';
+import {
+  setTokenCookies,
+  clearRefreshTokenCookie,
+} from '../../utils/cookieHelper';
 
 export const issueAccessToken: RequestHandler = async (req, res) => {
   try {
@@ -18,11 +22,7 @@ export const issueAccessToken: RequestHandler = async (req, res) => {
     // 2. JWT 검증
     const payload = verifyToken(refreshToken);
     if (!payload) {
-      res.clearCookie('refresh_token', {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-      });
+      clearRefreshTokenCookie(res);
       sendError(res, 401, 'Invalid or expired refresh token');
       return;
     }
@@ -37,18 +37,7 @@ export const issueAccessToken: RequestHandler = async (req, res) => {
     const newRefreshToken = generateRefreshToken(jwtPayload);
 
     // 4. 쿠키 갱신
-    res.cookie('access_token', newAccessToken, {
-      httpOnly: true,
-      sameSite: 'none',
-      secure: true,
-      maxAge: 1000 * 60 * 5,
-    });
-    res.cookie('refresh_token', newRefreshToken, {
-      httpOnly: true,
-      sameSite: 'none',
-      secure: true,
-      maxAge: 1000 * 60 * 60 * 24 * 30,
-    });
+    setTokenCookies(res, newAccessToken, newRefreshToken);
 
     sendSuccess(res, 200, 'Access token issued', {
       message: 'Access token issued',

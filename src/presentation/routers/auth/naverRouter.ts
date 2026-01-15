@@ -1,8 +1,9 @@
 import dotenv from 'dotenv';
-import { Router } from 'express';
+import { Router, NextFunction } from 'express';
 import passport from 'passport';
 import { User } from '../../../domain/models/user';
 import { generateAccessToken, generateRefreshToken } from '../../../utils/jwt';
+import { setTokenCookies } from '../../../utils/cookieHelper';
 
 const naverRouter = Router();
 
@@ -23,8 +24,37 @@ naverRouter.get(
 
 naverRouter.get(
   '/callback',
-  passport.authenticate('naver', { failureRedirect: '/', session: false }),
-  async (req, res) => {
+  (req, res, next) => {
+    passport.authenticate(
+      'naver',
+      { session: false },
+      (err: any, user: any, info: any) => {
+        if (err) {
+          // 다른 플랫폼으로 가입된 이메일인 경우
+          if (err.existingProvider) {
+            const error = new Error(err.message) as any;
+            error.status = 409; // Conflict
+            error.existingProvider = err.existingProvider;
+            error.email = err.email;
+            return next(error);
+          }
+          // 기타 에러
+          console.error('Naver authentication error:', err);
+          const error = new Error('인증에 실패했습니다.') as any;
+          error.status = 401;
+          return next(error);
+        }
+        if (!user) {
+          const error = new Error('인증에 실패했습니다.') as any;
+          error.status = 401;
+          return next(error);
+        }
+        req.user = user;
+        next();
+      },
+    )(req, res, next);
+  },
+  async (req, res, next) => {
     try {
       const user = req.user as User;
       const userService = req.app.get('userService');
@@ -42,23 +72,12 @@ naverRouter.get(
       const accessToken = generateAccessToken(jwtPayload);
       const refreshToken = generateRefreshToken(jwtPayload);
 
-      res.cookie('access_token', accessToken, {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-        maxAge: 1000 * 60 * 5,
-      });
-      res.cookie('refresh_token', refreshToken, {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-        maxAge: 1000 * 60 * 60 * 24 * 30,
-      });
+      setTokenCookies(res, accessToken, refreshToken);
 
       res.redirect(`${redirectUrlBase}/login`);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Naver callback error:', err);
-      res.redirect('/');
+      return next(err);
     }
   },
 );

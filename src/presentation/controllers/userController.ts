@@ -21,6 +21,7 @@ dotenv.config();
 
 import { sendSuccess, sendError } from '../../utils/responseHelper';
 import { ApiResponse, ErrorResponse } from '../models/apiResponse';
+import { clearTokenCookies } from '../../utils/cookieHelper';
 
 const mapUserToResponse = (user: {
   id: string;
@@ -382,16 +383,7 @@ export const getUserSearchHandler = async (req: Request, res: Response) => {
 };
 
 export const logout = (_req: Request, res: Response) => {
-  res.clearCookie('access_token', {
-    httpOnly: true,
-    sameSite: 'none',
-    secure: true,
-  });
-  res.clearCookie('refresh_token', {
-    httpOnly: true,
-    sameSite: 'none',
-    secure: true,
-  });
+  clearTokenCookies(res);
 
   res.status(204).end();
 };

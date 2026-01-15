@@ -55,6 +55,48 @@ setupSwagger(app);
 
 app.use('/', rootRouter);
 
+// 에러 핸들러 미들웨어 (라우터 이후에 위치)
+app.use(
+  (
+    err: any,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ): void => {
+    console.error('Error:', err);
+
+    // OAuth 콜백 에러인 경우 - 에러 코드만 전달
+    if (req.path.includes('/callback')) {
+      const redirectUrlBase =
+        process.env.REDIRECT_URL_BASE || 'http://localhost:5173';
+
+      if (err.existingProvider) {
+        // 다른 플랫폼으로 가입된 이메일
+        res.redirect(`${redirectUrlBase}/login?error=PROVIDER_MISMATCH`);
+        return;
+      }
+
+      // 기타 OAuth 에러
+      res.redirect(`${redirectUrlBase}/login?error=AUTH_FAILED`);
+      return;
+    }
+
+    // 일반 API 에러
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || '서버 오류가 발생했습니다.';
+
+    res.status(status).json({
+      isSuccess: false,
+      code: status.toString(),
+      message,
+      ...(err.existingProvider && {
+        existingProvider: err.existingProvider,
+        email: err.email,
+      }),
+    });
+  },
+);
+
 app.get('/test', (req, res) => {
   res.json({
     protocol: req.protocol,

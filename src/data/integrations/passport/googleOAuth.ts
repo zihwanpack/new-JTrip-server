@@ -40,7 +40,12 @@ const configureGooglePassport = (
             console.log(
               `이미 다른 플랫폼으로 가입된 이메일입니다. 가입된 플랫폼: ${existingUser.provider}`,
             );
-            return done(null, false);
+            const error = new Error(
+              `이미 가입된 이메일입니다. 가입된 플랫폼: ${existingUser.provider}`,
+            ) as any;
+            error.existingProvider = existingUser.provider;
+            error.email = email;
+            return done(error, false);
           }
           const newUser = await userRepository.createUser({
             provider: provider,
