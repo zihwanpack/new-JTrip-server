@@ -137,20 +137,14 @@ export class TripEventController {
    * event_id로 event 단일 삭제
    */
   @Delete('/:event_id')
-  @TsoaResponse<ApiResponse<{}>>(200, '이벤트가 성공적으로 삭제되었습니다')
+  @TsoaResponse<void>(204, '이벤트가 성공적으로 삭제되었습니다')
   @TsoaResponse<ErrorResponse>(404, '이벤트를 찾을 수 없습니다')
   @TsoaResponse<ErrorResponse>(500, '서버 오류')
   public async deleteTripEventById(
     @Path() event_id: number,
-  ): Promise<ApiResponse<{}>> {
+  ): Promise<void> {
     try {
       await this.tripEventService.deleteTripEventById(event_id);
-      return {
-        isSuccess: true,
-        code: '200',
-        message: '이벤트가 성공적으로 삭제되었습니다',
-        result: {},
-      };
     } catch (error: any) {
       throw {
         status: 404,
@@ -238,8 +232,8 @@ export class TripEventController {
         return;
       }
 
-      const apiResponse = await this.deleteTripEventById(event_id);
-      res.status(200).json(apiResponse);
+      await this.deleteTripEventById(event_id);
+      res.status(204).end();
     } catch (error: any) {
       sendError(
         res,

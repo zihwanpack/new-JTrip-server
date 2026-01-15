@@ -10,8 +10,7 @@
 			"UserResponse": {
 				"properties": {
 					"id": {
-						"type": "number",
-						"format": "double"
+						"type": "string"
 					},
 					"email": {
 						"type": "string"
@@ -81,33 +80,6 @@
 							"$ref": "#/components/schemas/UserResponse"
 						},
 						"type": "array",
-						"nullable": true
-					}
-				},
-				"required": [
-					"isSuccess",
-					"code",
-					"message",
-					"result"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ApiResponse____": {
-				"description": "통일된 API 응답 형식",
-				"properties": {
-					"isSuccess": {
-						"type": "boolean"
-					},
-					"code": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"result": {
-						"properties": {},
-						"type": "object",
 						"nullable": true
 					}
 				},
@@ -354,40 +326,6 @@
 								"$ref": "#/components/schemas/TripScheduleResponse"
 							}
 						],
-						"nullable": true
-					}
-				},
-				"required": [
-					"isSuccess",
-					"code",
-					"message",
-					"result"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ApiResponse__message-string__": {
-				"description": "통일된 API 응답 형식",
-				"properties": {
-					"isSuccess": {
-						"type": "boolean"
-					},
-					"code": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"result": {
-						"properties": {
-							"message": {
-								"type": "string"
-							}
-						},
-						"required": [
-							"message"
-						],
-						"type": "object",
 						"nullable": true
 					}
 				},
@@ -680,8 +618,7 @@
 						"name": "id",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					}
 				]
@@ -689,15 +626,8 @@
 			"delete": {
 				"operationId": "DeleteUser",
 				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ApiResponse____"
-								}
-							}
-						}
+					"204": {
+						"description": "No content"
 					}
 				},
 				"description": "유저 삭제",
@@ -715,8 +645,7 @@
 						"name": "id",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					}
 				]
@@ -846,15 +775,8 @@
 			"post": {
 				"operationId": "Logout",
 				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ApiResponse____"
-								}
-							}
-						}
+					"204": {
+						"description": "No content"
 					}
 				},
 				"description": "로그아웃",
@@ -908,15 +830,8 @@
 			"delete": {
 				"operationId": "DeleteTrips",
 				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ApiResponse____"
-								}
-							}
-						}
+					"204": {
+						"description": "No content"
 					}
 				},
 				"description": "여러 여행 일정 삭제",
@@ -983,8 +898,7 @@
 						"name": "userId",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					}
 				]
@@ -1020,8 +934,7 @@
 						"name": "userId",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					}
 				]
@@ -1057,8 +970,7 @@
 						"name": "userId",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					},
 					{
@@ -1113,8 +1025,7 @@
 						"name": "userId",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					}
 				]
@@ -1150,8 +1061,7 @@
 						"name": "userId",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					}
 				]
@@ -1187,8 +1097,7 @@
 						"name": "userId",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					},
 					{
@@ -1257,7 +1166,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/ApiResponse__message-string__"
+									"$ref": "#/components/schemas/ApiResponse_TripScheduleResponse_"
 								}
 							}
 						}
@@ -1297,15 +1206,8 @@
 			"delete": {
 				"operationId": "DeleteTrip",
 				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ApiResponse____"
-								}
-							}
-						}
+					"204": {
+						"description": "No content"
 					}
 				},
 				"description": "여행 일정 삭제",
@@ -1451,15 +1353,8 @@
 			"delete": {
 				"operationId": "DeleteTripEventById",
 				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ApiResponse____"
-								}
-							}
-						}
+					"204": {
+						"description": "No content"
 					}
 				},
 				"description": "event_id로 event 단일 삭제",

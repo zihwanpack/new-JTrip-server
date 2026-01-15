@@ -11,6 +11,9 @@ import { authenticateJwt } from '../../middlewares/authenticateJwt';
 
 const userRouter = Router();
 
+// 로그아웃은 인증 없이 접근 가능
+userRouter.post('/logout', logout);
+
 userRouter.use(authenticateJwt);
 
 userRouter.get('/email/:email', findUserByEmail);
@@ -26,8 +29,6 @@ userRouter.get('/search', getUserSearchHandler);
 
 // 동적 경로는 아래에 위치
 userRouter.get('/:id', getUserById);
-
-userRouter.post('/logout', logout);
 
 userRouter.delete('/:id', (req, res) => {
   deleteUser(req, res);

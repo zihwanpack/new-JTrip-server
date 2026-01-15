@@ -209,10 +209,10 @@ export class UserController {
    * 유저 삭제
    */
   @Delete('/:id')
-  @TsoaResponse<ApiResponse<{}>>(200, '유저가 성공적으로 삭제되었습니다')
+  @TsoaResponse<void>(204, '유저가 성공적으로 삭제되었습니다')
   @TsoaResponse<ErrorResponse>(404, '유저를 찾을 수 없습니다')
   @TsoaResponse<ErrorResponse>(500, '서버 오류')
-  public async deleteUser(@Path() id: string): Promise<ApiResponse<{}>> {
+  public async deleteUser(@Path() id: string): Promise<void> {
     try {
       const user = await this.userService.findUserById(id);
       if (!user) {
@@ -229,13 +229,6 @@ export class UserController {
           message: '유저 삭제에 실패했습니다.',
         };
       }
-
-      return {
-        isSuccess: true,
-        code: '200',
-        message: '유저가 성공적으로 삭제되었습니다',
-        result: {},
-      };
     } catch (error: any) {
       throw {
         status: error.status || 500,
@@ -248,14 +241,9 @@ export class UserController {
    * 로그아웃
    */
   @Post('/logout')
-  @TsoaResponse<ApiResponse<{}>>(200, '로그아웃 성공')
-  public logout(): ApiResponse<{}> {
-    return {
-      isSuccess: true,
-      code: '200',
-      message: '로그아웃 성공',
-      result: {},
-    };
+  @TsoaResponse<void>(204, '로그아웃 성공')
+  public logout(): void {
+    // 204 No Content - 응답 본문 없음
   }
 }
 
@@ -405,7 +393,7 @@ export const logout = (_req: Request, res: Response) => {
     secure: false,
   });
 
-  sendSuccess(res, 200, '로그아웃이 성공적으로 완료되었습니다.', {});
+  res.status(204).end();
 };
 
 export const deleteUser = async (req: Request, res: Response) => {
@@ -427,7 +415,7 @@ export const deleteUser = async (req: Request, res: Response) => {
       return;
     }
 
-    sendSuccess(res, 200, '유저가 성공적으로 삭제되었습니다.', {});
+    res.status(204).end();
   } catch (error) {
     console.error('유저 삭제 오류:', error);
     sendError(res, 500, '유저 삭제 중 오류가 발생했습니다.');

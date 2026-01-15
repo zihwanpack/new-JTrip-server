@@ -504,7 +504,7 @@ export class TripScheduleController {
    * 여행 일정 업데이트
    */
   @Patch('/:tripId')
-  @TsoaResponse<ApiResponse<{ message: string }>>(
+  @TsoaResponse<ApiResponse<TripScheduleResponse>>(
     200,
     '여행 일정이 성공적으로 업데이트되었습니다',
   )
@@ -513,7 +513,7 @@ export class TripScheduleController {
   public async updateTripSchedule(
     @Path() tripId: number,
     @Body() body: UpdateTripRequest,
-  ): Promise<ApiResponse<{ message: string }>> {
+  ): Promise<ApiResponse<TripScheduleResponse>> {
     try {
       if (isNaN(tripId)) {
         throw {
@@ -558,11 +558,16 @@ export class TripScheduleController {
 
       await this.tripScheduleService.updateTripSchedule(updateTripData);
 
+      // 업데이트된 여행 데이터 조회
+      const updatedTrip =
+        await this.tripScheduleService.getTripScheduleWithmembers(tripId);
+      const result = TripScheduleConverter.toResDto(updatedTrip);
+
       return {
         isSuccess: true,
         code: '200',
         message: '여행 일정이 성공적으로 업데이트되었습니다',
-        result: { message: 'Trip schedule updated successfully' },
+        result,
       };
     } catch (error: any) {
       console.error('TripScheduleController update error:', error);
@@ -577,10 +582,10 @@ export class TripScheduleController {
    * 여행 일정 삭제
    */
   @Delete('/:tripId')
-  @TsoaResponse<ApiResponse<{}>>(200, '여행 일정이 성공적으로 삭제되었습니다')
+  @TsoaResponse<void>(204, '여행 일정이 성공적으로 삭제되었습니다')
   @TsoaResponse<ErrorResponse>(400, '잘못된 요청')
   @TsoaResponse<ErrorResponse>(500, '서버 오류')
-  public async deleteTrip(@Path() tripId: number): Promise<ApiResponse<{}>> {
+  public async deleteTrip(@Path() tripId: number): Promise<void> {
     try {
       if (isNaN(tripId)) {
         throw {
@@ -590,12 +595,6 @@ export class TripScheduleController {
       }
 
       await this.tripScheduleService.deleteTripById(tripId);
-      return {
-        isSuccess: true,
-        code: '200',
-        message: '여행 일정이 성공적으로 삭제되었습니다',
-        result: {},
-      };
     } catch (error: any) {
       console.error('TripScheduleController delete error:', error);
       throw {
@@ -609,12 +608,12 @@ export class TripScheduleController {
    * 여러 여행 일정 삭제
    */
   @Delete('/')
-  @TsoaResponse<ApiResponse<{}>>(200, '여행 일정들이 성공적으로 삭제되었습니다')
+  @TsoaResponse<void>(204, '여행 일정들이 성공적으로 삭제되었습니다')
   @TsoaResponse<ErrorResponse>(400, '잘못된 요청')
   @TsoaResponse<ErrorResponse>(500, '서버 오류')
   public async deleteTrips(
     @Body() body: { ids: number[] },
-  ): Promise<ApiResponse<{}>> {
+  ): Promise<void> {
     try {
       const tripIds: number[] = body.ids;
 
@@ -630,12 +629,6 @@ export class TripScheduleController {
       }
 
       await this.tripScheduleService.deleteTripsByIds(tripIds);
-      return {
-        isSuccess: true,
-        code: '200',
-        message: '여행 일정들이 성공적으로 삭제되었습니다',
-        result: {},
-      };
     } catch (error: any) {
       console.error('TripScheduleController delete error:', error);
       throw {
@@ -800,8 +793,8 @@ export class TripScheduleController {
   deleteTripHandler = async (req: Request, res: Response) => {
     try {
       const tripId = Number(req.params.tripId);
-      const apiResponse = await this.deleteTrip(tripId);
-      res.status(200).json(apiResponse);
+      await this.deleteTrip(tripId);
+      res.status(204).end();
     } catch (error: any) {
       sendError(
         res,
@@ -813,8 +806,8 @@ export class TripScheduleController {
 
   deleteTripsHandler = async (req: Request, res: Response) => {
     try {
-      const apiResponse = await this.deleteTrips(req.body);
-      res.status(200).json(apiResponse);
+      await this.deleteTrips(req.body);
+      res.status(204).end();
     } catch (error: any) {
       sendError(
         res,
