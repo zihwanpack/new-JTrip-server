@@ -611,9 +611,7 @@ export class TripScheduleController {
   @TsoaResponse<void>(204, '여행 일정들이 성공적으로 삭제되었습니다')
   @TsoaResponse<ErrorResponse>(400, '잘못된 요청')
   @TsoaResponse<ErrorResponse>(500, '서버 오류')
-  public async deleteTrips(
-    @Body() body: { ids: number[] },
-  ): Promise<void> {
+  public async deleteTrips(@Body() body: { ids: number[] }): Promise<void> {
     try {
       const tripIds: number[] = body.ids;
 

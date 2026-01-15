@@ -140,9 +140,7 @@ export class TripEventController {
   @TsoaResponse<void>(204, '이벤트가 성공적으로 삭제되었습니다')
   @TsoaResponse<ErrorResponse>(404, '이벤트를 찾을 수 없습니다')
   @TsoaResponse<ErrorResponse>(500, '서버 오류')
-  public async deleteTripEventById(
-    @Path() event_id: number,
-  ): Promise<void> {
+  public async deleteTripEventById(@Path() event_id: number): Promise<void> {
     try {
       await this.tripEventService.deleteTripEventById(event_id);
     } catch (error: any) {

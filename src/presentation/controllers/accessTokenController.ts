@@ -50,7 +50,9 @@ export const issueAccessToken: RequestHandler = async (req, res) => {
       maxAge: 1000 * 60 * 60 * 24 * 30,
     });
 
-    sendSuccess(res, 200, 'Access token issued', { message: 'Access token issued' });
+    sendSuccess(res, 200, 'Access token issued', {
+      message: 'Access token issued',
+    });
     return;
   } catch (err) {
     console.error('issueAccessToken error:', err);
