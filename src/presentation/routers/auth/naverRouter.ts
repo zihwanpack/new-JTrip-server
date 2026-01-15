@@ -17,6 +17,7 @@ naverRouter.get(
   passport.authenticate('naver', {
     scope: ['profile', 'email'],
     session: false,
+    state: 'naver-login',
   }),
 );
 
