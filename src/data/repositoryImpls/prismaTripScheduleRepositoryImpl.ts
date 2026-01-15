@@ -411,7 +411,6 @@ export class PrismaTripScheduleRepositoryImpl
     }
   }
 
-  // trip_id로 여행 일정 조회
   async findTripById(id: number): Promise<TripSchedule> {
     const trip = await prisma.tripSchedule.findUnique({
       where: { id },
