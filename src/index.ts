@@ -15,7 +15,7 @@ app.set('trust proxy', 1);
 
 di(app);
 
-//적용 env 체크
+//적용 env 체크함
 const env = process.env.NODE_ENV || 'local';
 dotenv.config({
   path: `.env.${env}`,
