@@ -1,4 +1,3 @@
-// src/presentation/routes/tripEventRoutes.ts
 import { Router, Request } from 'express';
 import { TripEventController } from '../controllers/tripEventController';
 import { authenticateJwt } from '../middlewares/authenticateJwt';
