@@ -27,7 +27,7 @@ app.use(
     origin: (origin, callback) => {
       const allowedOrigins = [
         'http://localhost:5173',
-        'https://new-j-trip-eu08v40rs-zihwanpacks-projects.vercel.app',
+        'https://trip-j.store',
         'https://new-j-trip.vercel.app',
       ];
       if (!origin || allowedOrigins.includes(origin)) {
