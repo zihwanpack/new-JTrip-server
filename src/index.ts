@@ -28,6 +28,7 @@ app.use(
       const allowedOrigins = [
         'http://localhost:5173',
         'https://trip-j.store',
+        'https://www.trip-j.store',
         'https://new-j-trip.vercel.app',
       ];
       if (!origin || allowedOrigins.includes(origin)) {
