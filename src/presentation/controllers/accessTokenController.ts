@@ -36,7 +36,7 @@ export const issueAccessToken: RequestHandler = async (req, res) => {
     const newAccessToken = generateAccessToken(jwtPayload);
     const newRefreshToken = generateRefreshToken(jwtPayload);
 
-    // 4. 쿠키 갱신
+    // 4. 쿠키 갱신함
     setTokenCookies(res, newAccessToken, newRefreshToken);
 
     sendSuccess(res, 200, 'Access token issued', {
